@@ -20,13 +20,10 @@
                         </div>
                         <!-- end page-title -->
 
-                
-        
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card m-b-30">
                                     <div class="card-body">
-        
                                         <div class="row p-3">
                                             <div class="col-lg-4">
                                                 <form role="search" class="email-inbox">
@@ -40,7 +37,7 @@
                                             <div class="col-lg-8">
                                                 <div class="btn-toolbar float-lg-right form-group mb-0" role="toolbar">
                                                     <div class="">
-                                                        <a href="add-drinks.html" class="btn btn-info waves-effect waves-light  m-r-5" role="button"><i class="fas fa-plus"></i> <i></i> <span>Add Drinks</span> </a>
+                                                        <a href="/manage-drinks/add" class="btn btn-info waves-effect waves-light  m-r-5" role="button"><i class="fas fa-plus"></i> <i></i> <span>Add Drinks</span> </a>
                                                         <button type="button" class="btn btn-dark waves-light waves-effect"><i class="far fa-trash-alt"></i> <i></i><span>Delete Selection</span> </button>
                                                     </div>
                                                 </div>
@@ -61,37 +58,23 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    {{#each drinks}}
                                                     <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Pizza xxxx</td>
-                                                        <td>Pizza</td>
-                                                        <td>9000000</td>
+                                                        <th scope="row">{{_id}}</th>
+                                                        <td>{{name}}</td>
+                                                        <td>{{category}}</td>
+                                                        <td>{{price}}</td>
                                                         <td><span class="badge badge-info">Normal</span></td>
                                                         <td>
                                                             <div class="btn-toolbar form-group mb-0">
                                                                 <div class="">
-                                                                    <a href="update-drinks.html" role="button" class="btn btn-success waves-effect waves-light m-r-5"><i class="far fa-edit"></i></a>
+                                                                    <a href="/manage-drinks/update" role="button" class="btn btn-success waves-effect waves-light m-r-5"><i class="far fa-edit"></i></a>
                                                                     <button type="button" class="btn btn-danger waves-effect waves-light m-r-5" data-toggle="modal" data-target="#alertDeleteModal"><i class="far fa-trash-alt"></i></button>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Pepsi xxxx</td>
-                                                        <td>Thức uống</td>
-                                                        <td>20000</td>
-                                                        <td><span class="badge badge-danger">Out of stock</span></td>
-                                                        <td>
-                                                            <div class="btn-toolbar form-group mb-0">
-                                                                <div class="">
-                                                                    <a href="update-drinks.html" role="button" class="btn btn-success waves-effect waves-light m-r-5"><i class="far fa-edit"></i></a>
-                                                                    <button type="button" class="btn btn-danger waves-effect waves-light m-r-5" data-toggle="modal" data-target="#alertDeleteModal"><i class="far fa-trash-alt"></i></button>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                    {{/each}}
                                                 </tbody>
                                             </table>
 

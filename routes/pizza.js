@@ -1,9 +1,14 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('pizza/manage');
-});
+const pizzaController = require('../controller/pizzaController')
+
+router.get('/', pizzaController.index)
+
+router.get('/add', pizzaController.add);
+
+router.post('/add', pizzaController.confirmAdd);
+
+router.get('/update', pizzaController.update);
 
 module.exports = router;
