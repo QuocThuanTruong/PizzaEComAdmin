@@ -7,8 +7,10 @@ router.get('/', pizzaController.index)
 
 router.get('/add', pizzaController.add);
 
-router.post('/add', pizzaController.confirmAdd);
+router.post('/add', pizzaController.addInfo);
 
-router.get('/update', pizzaController.update);
+router.get('/update/:id', pizzaController.update);
+
+router.post('/update/:id', pizzaController.updateInfo);
 
 module.exports = router;

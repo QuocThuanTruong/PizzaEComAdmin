@@ -31,7 +31,20 @@ exports.get = async (id) => {
 
     const pizza = await pizzaCollection.findOne({_id: ObjectId(id)})
 
-    console.log(pizza)
-
     return pizza;
+}
+
+exports.update = async (id, name, description, price, kind, sizes, doughs, topings) => {
+    const pizzaCollection = db().collection('pizza');
+
+    const _ = await pizzaCollection.updateOne({'_id': ObjectId(id)}, {$set :{
+        "category": "pizza",
+        "name": name,
+        "description": description,
+        "price": price,
+        "kind": kind,
+        "size": sizes,
+        "dough": doughs,
+        "toping": topings
+    }})
 }

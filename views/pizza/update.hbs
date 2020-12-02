@@ -1,178 +1,350 @@
 <div class="content-page">
-                <!-- Start content -->
-                <div class="content">
-                    <div class="container-fluid">
-                        <div class="page-title-box">
-                            <div class="row align-items-center">
-                                <div class="col-sm-6">
-                                    <h4 class="page-title">Update Pizza</h4>
+    <!-- Start content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="page-title-box">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <h4 class="page-title">Update Pizza</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-right">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Manage Pizza</a></li>
+                            <li class="breadcrumb-item active">Update Pizza</li>
+                        </ol>
+                    </div>
+                </div> <!-- end row -->
+            </div>
+            <!-- end page-title -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+
+                        <h4 class="mt-0 header-title">Sửa thông thông tin của sản phẩm cần cập nhật</h4>
+              
+                        <input type="hidden" id="id" name="id" value="{{_id}}"/>
+                        <!-- Form -->
+                                <div class="form-group">
+                                    <label>Tên</label>
+                                    <input type="text" class="form-control" required placeholder="Tên sản phẩm" value="{{name}}" id="name" name="name"/>
                                 </div>
-                                <div class="col-sm-6">
-                                    <ol class="breadcrumb float-right">
-                                        <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript:void(0);">Manage Pizza</a></li>
-                                        <li class="breadcrumb-item active">Update Pizza</li>
-                                    </ol>
-                                </div>
-                            </div> <!-- end row -->
-                        </div>
-                        <!-- end page-title -->
 
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card m-b-30">
-                                    <div class="card-body">
-        
-                                    <h4 class="mt-0 header-title">Sửa thông thông tin của sản phẩm cần cập nhật</h4>
-                                    </p>
-        
-                                    <!-- Form -->
-                                        <form class="" action="#">
-                                            <div class="form-group">
-                                                <label>Tên</label>
-                                                <input type="text" class="form-control" required placeholder="Tên sản phẩm"/>
-                                            </div>
-
-                                            <div class="form-group col-sm-2 img-picker-container"> 
-                                                <label>Ảnh đại diện</label>
-                                                <div class="img-picker"></div>
-                                            </div> 
+                                <div class="form-group col-sm-2 img-picker-container"> 
+                                    <label>Ảnh đại diện</label>
+                                    <div class="img-picker"></div>
+                                </div> 
 
 
-                                            <div class="form-group">
-                                                <label>Mô tả</label>
-                                                <div>
-                                                    <textarea required class="form-control" rows="5" required placeholder="Mô tả sản phẩm"></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group img-picker-container"> 
-                                                <label>Ảnh mô tả</label>
-                                                <div class="row">
-                                                <div class="img-picker col-sm-2"></div>
-                                                <div class="img-picker col-sm-2"></div>
-                                                <div class="img-picker col-sm-2"></div>
-                                                <div class="img-picker col-sm-2"></div>
-                                            </div>
-                                            </div> 
-
-                                            <div class="form-group">
-                                                <label>Giá tiền</label>
-                                                <div class="input-group">
-                                                    <input data-parsley-type="number" type="text"
-                                                           class="form-control" required
-                                                           placeholder="Giá tiền sản phẩm"/>
-
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">VNĐ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Loại</label>
-                                                <div >
-                                                    <select class="form-control">
-                                                        <option>Truyền thống</option>
-                                                        <option>Hải sản</option>
-                                                        <option>Thập cẩm</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Kích thước</label>
-                                                <div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck1" data-parsley-multiple="groups"
-                                                               data-parsley-mincheck="1">
-                                                        <label class="custom-control-label" for="customCheck1"><p>25cm <span>(250g)</span></p>  </label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck2" data-parsley-multiple="groups"
-                                                               data-parsley-mincheck="1">
-                                                        <label class="custom-control-label" for="customCheck2"><p>30cm <span>(450g)</span></p>  </label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck3" data-parsley-multiple="groups"
-                                                               data-parsley-mincheck="1">
-                                                        <label class="custom-control-label" for="customCheck3"><p>40cm <span>(550g)</span></p>  </label>
-                                                    </div>
-        
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Đế bánh</label>
-                                                <div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck4" data-parsley-multiple="groups"
-                                                               data-parsley-mincheck="1">
-                                                        <label class="custom-control-label" for="customCheck4">Mỏng</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck5" data-parsley-multiple="groups"
-                                                               data-parsley-mincheck="1">
-                                                        <label class="custom-control-label" for="customCheck5">Dày</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Toping đi kèm</label>
-                                                <div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck6" data-parsley-multiple="groups"
-                                                               data-parsley-mincheck="1">
-                                                        <label class="custom-control-label" for="customCheck6">Ớt chuông</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck7" data-parsley-multiple="groups"
-                                                               data-parsley-mincheck="1">
-                                                        <label class="custom-control-label" for="customCheck7 ">Thị xông khói</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck8" data-parsley-multiple="groups"
-                                                               data-parsley-mincheck="1">
-                                                        <label class="custom-control-label" for="customCheck8 ">Nấm</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck9" data-parsley-multiple="groups"
-                                                               data-parsley-mincheck="1">
-                                                        <label class="custom-control-label" for="customCheck9 ">Cải xà lách</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div>
-                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                                        Update
-                                                    </button>
-                                                    <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                                                        Bỏ qua
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-        
+                                <div class="form-group">
+                                    <label>Mô tả</label>
+                                    <div>
+                                        <textarea required class="form-control" rows="5" required placeholder="Mô tả sản phẩm"  id="description" name="description">{{description}}</textarea>
                                     </div>
                                 </div>
-                            </div> <!-- end col -->
-        
 
-                            
-                        </div> <!-- end row -->      
+                                <div class="form-group img-picker-container"> 
+                                    <label>Ảnh mô tả</label>
+                                    <div class="row">
+                                    <div class="img-picker col-sm-2"></div>
+                                    <div class="img-picker col-sm-2"></div>
+                                    <div class="img-picker col-sm-2"></div>
+                                    <div class="img-picker col-sm-2"></div>
+                                </div>
+                                </div> 
 
-                        
+                                <div class="form-group">
+                                    <label>Giá tiền</label>
+                                    <div class="input-group">
+                                        <input data-parsley-type="number" type="text"
+                                            class="form-control" required
+                                            placeholder="Giá tiền sản phẩm"
+                                            value={{price}}
+                                            id="price"
+                                            name="price"/>
+
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">VNĐ</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Loại</label>
+                                    <div >
+                                        <select class="form-control" name="kind" id="kind">
+                                            {{#if (isTraditional)}}
+                                            <option selected>Truyền thống</option>
+                                            {{else}}
+                                            <option>Truyền thống</option>
+                                            {{/if}}
+
+                                            {{#if (isSea)}}
+                                            <option selected>Hải sản</option>
+                                            {{else}}
+                                            <option>Hải sản</option>
+                                            {{/if}}
+
+                                            {{#if (isMixed)}}
+                                            <option selected>Thập cẩm</option>
+                                            {{else}}
+                                            <option>Thập cẩm</option>
+                                            {{/if}}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Kích thước</label>
+                                    <div>
+                                        <div class="custom-control custom-checkbox">
+                                            {{#if (size1)}}
+                                            <input type="checkbox" class="custom-control-input" id="size1" data-parsley-multiple="groups"
+                                                    data-parsley-mincheck="1" checked>
+                                            {{else}}
+                                            <input type="checkbox" class="custom-control-input" id="size1" data-parsley-multiple="groups"
+                                                data-parsley-mincheck="1">
+                                            {{/if}}
+                                            <label class="custom-control-label" for="size1"><p>25cm <span>(250g)</span></p>  </label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            {{#if (size2)}}
+                                            <input type="checkbox" class="custom-control-input" id="size2" data-parsley-multiple="groups"
+                                                    data-parsley-mincheck="1" checked>
+                                            {{else}}
+                                            <input type="checkbox" class="custom-control-input" id="size2" data-parsley-multiple="groups"
+                                                data-parsley-mincheck="1">
+                                            {{/if}}
+                                            <label class="custom-control-label" for="size2"><p>30cm <span>(450g)</span></p>  </label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            {{#if (size3)}}
+                                            <input type="checkbox" class="custom-control-input" id="size3" data-parsley-multiple="groups"
+                                                    data-parsley-mincheck="1" checked>
+                                            {{else}}
+                                            <input type="checkbox" class="custom-control-input" id="size3" data-parsley-multiple="groups"
+                                                data-parsley-mincheck="1">
+                                            {{/if}}
+                                            <label class="custom-control-label" for="size3"><p>40cm <span>(550g)</span></p>  </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Đế bánh</label>
+                                    <div>
+                                        <div class="custom-control custom-checkbox">
+                                            {{#if (dough1)}}
+                                            <input type="checkbox" class="custom-control-input" id="dough1" data-parsley-multiple="groups"
+                                                    data-parsley-mincheck="1" checked>
+                                            {{else}}
+                                            <input type="checkbox" class="custom-control-input" id="dough1" data-parsley-multiple="groups"
+                                                data-parsley-mincheck="1">
+                                            {{/if}}
+                                            <label class="custom-control-label" for="dough1">Mỏng</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            {{#if (dough2)}}
+                                            <input type="checkbox" class="custom-control-input" id="dough2" data-parsley-multiple="groups"
+                                                    data-parsley-mincheck="1" checked>
+                                            {{else}}
+                                            <input type="checkbox" class="custom-control-input" id="dough2" data-parsley-multiple="groups"
+                                                data-parsley-mincheck="1">
+                                            {{/if}}
+                                            <label class="custom-control-label" for="dough2">Dày</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Toping đi kèm</label>
+                                    <div>
+                                        <div class="custom-control custom-checkbox">
+                                            {{#if (toping1)}}
+                                            <input type="checkbox" class="custom-control-input" id="toping1" data-parsley-multiple="groups"
+                                                    data-parsley-mincheck="1" checked>
+                                            {{else}}
+                                            <input type="checkbox" class="custom-control-input" id="toping1" data-parsley-multiple="groups"
+                                                data-parsley-mincheck="1">
+                                            {{/if}}
+                                            <label class="custom-control-label" for="toping1">Ớt chuông</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            {{#if (toping2)}}
+                                            <input type="checkbox" class="custom-control-input" id="toping2" data-parsley-multiple="groups"
+                                                    data-parsley-mincheck="1" checked>
+                                            {{else}}
+                                            <input type="checkbox" class="custom-control-input" id="toping2" data-parsley-multiple="groups"
+                                                data-parsley-mincheck="1">
+                                            {{/if}}
+                                            <label class="custom-control-label" for="toping2">Thị xông khói</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            {{#if (toping3)}}
+                                            <input type="checkbox" class="custom-control-input" id="toping3" data-parsley-multiple="groups"
+                                                    data-parsley-mincheck="1" checked>
+                                            {{else}}
+                                            <input type="checkbox" class="custom-control-input" id="toping3" data-parsley-multiple="groups"
+                                                data-parsley-mincheck="1">
+                                            {{/if}}
+                                            <label class="custom-control-label" for="toping3">Nấm</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            {{#if (toping4)}}
+                                            <input type="checkbox" class="custom-control-input" id="toping4" data-parsley-multiple="groups"
+                                                    data-parsley-mincheck="1" checked>
+                                            {{else}}
+                                            <input type="checkbox" class="custom-control-input" id="toping4" data-parsley-multiple="groups"
+                                                data-parsley-mincheck="1">
+                                            {{/if}}
+                                            <label class="custom-control-label" for="toping4">Cải xà lách</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>
+                                        <button class="btn btn-primary waves-effect waves-light" onclick="sendInfo()">
+                                            Update
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                            Bỏ qua
+                                        </button>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
-                    <!-- container-fluid -->
+                </div> <!-- end col -->
+            </div> <!-- end row -->      
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- content -->
 
-                </div>
-                <!-- content -->
+    <footer class="footer">
+        © 2019 Stexo <span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</span>.
+    </footer>
 
-                <footer class="footer">
-                    © 2019 Stexo <span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</span>.
-                </footer>
+</div>
 
-            </div>
+<script>
+    function sendInfo()
+    {
+        const id = document.getElementById("id").value;
+
+        const name = document.getElementById("name");
+
+        if (name.value.length == 0) {
+            alert("Vui Lòng Không Bỏ Trống Tên Sản Phẩm")
+            return false
+        }
+
+        const description = document.getElementById("description");
+
+        if (description.value.length == 0) {
+            alert("Vui Lòng Không Bỏ Trống Mô Tả Sản Phẩm")
+            return false
+        }
+
+        const price = document.getElementById("price");
+
+        if (price.value.length == 0) {
+            alert("Vui Lòng Không Bỏ Trống Giá Sản Phẩm")
+            return false
+        }
+
+        const kind = document.getElementById("kind");
+
+        const size1 = document.getElementById("size1").checked
+        const size2 = document.getElementById("size2").checked
+        const size3 = document.getElementById("size3").checked
+        const dough1 = document.getElementById("dough1").checked
+        const dough2 = document.getElementById("dough2").checked
+        const toping1 = document.getElementById("toping1").checked
+        const toping2 = document.getElementById("toping2").checked
+        const toping3 = document.getElementById("toping3").checked
+        const toping4 = document.getElementById("toping4").checked
+        
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = "/manage-pizza/update/" + id;
+
+        const inputID = document.createElement("input")
+        inputID.name = "id"
+        inputID.value = id
+
+        form.appendChild(inputID)
+
+        const inputName = document.createElement("input");
+        inputName.name = "name";
+        inputName.value = name.value;
+        form.appendChild(inputName);
+
+        const inputDescription = document.createElement("input");
+        inputDescription.name = "description";
+        inputDescription.value = description.value;
+        form.appendChild(inputDescription);
+
+        const inputPrice = document.createElement("input");
+        inputPrice.name = "price";
+        inputPrice.value = price.value;
+        form.appendChild(inputPrice);
+
+        const inputKind = document.createElement("input");
+        inputKind.name = "kind";
+        inputKind.value = kind.value;
+        form.appendChild(inputKind);
+
+        const inputSize1 = document.createElement("input");
+        inputSize1.name = "size1";
+        inputSize1.value = size1;
+        form.appendChild(inputSize1);
+
+        const inputSize2 = document.createElement("input");
+        inputSize2.name = "size2";
+        inputSize2.value = size2;
+        form.appendChild(inputSize2);
+
+        const inputSize3 = document.createElement("input");
+        inputSize3.name = "size3";
+        inputSize3.value = size3;
+        form.appendChild(inputSize3);
+
+        const inputDough1 = document.createElement("input");
+        inputDough1.name = "dough1";
+        inputDough1.value = dough1;
+        form.appendChild(inputDough1);
+
+        const inputDough2 = document.createElement("input");
+        inputDough2.name = "dough2";
+        inputDough2.value = dough2;
+        form.appendChild(inputDough2);
+
+        const inputToping1 = document.createElement("input");
+        inputToping1.name = "toping1";
+        inputToping1.value = toping1;
+        form.appendChild(inputToping1);
+
+        const inputToping2 = document.createElement("input");
+        inputToping2.name = "toping2";
+        inputToping2.value = toping2;
+        form.appendChild(inputToping2);
+
+        const inputToping3 = document.createElement("input");
+        inputToping3.name = "toping3";
+        inputToping3.value = toping3;
+        form.appendChild(inputToping3);
+
+        const inputToping4 = document.createElement("input");
+        inputToping4.name = "toping4";
+        inputToping4.value = toping4;
+        form.appendChild(inputToping4);
+
+        document.body.appendChild(form);
+
+        form.submit();
+    }
+</script>
