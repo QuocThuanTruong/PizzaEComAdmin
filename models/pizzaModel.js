@@ -34,6 +34,12 @@ exports.get = async (id) => {
     return pizza;
 }
 
+exports.delete = async (id) => {
+    const pizzaCollection = db().collection('pizza');
+
+    const _ = await pizzaCollection.deleteOne({ '_id': ObjectId(id)})
+}
+
 exports.update = async (id, name, description, price, kind, sizes, doughs, topings) => {
     const pizzaCollection = db().collection('pizza');
 

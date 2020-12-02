@@ -8,8 +8,15 @@ let hbs = require('hbs')
 exports.index = async (req, res, next) => {
     const pizza = await pizzaModel.list()
 
-
     res.render('pizza/manage', {pizza})
+}
+
+exports.delete = async (req, res, next) => {
+    console.log(req.body['id'])
+
+    const _ = await pizzaModel.delete(req.body['id'])
+
+    this.index(req, res, next)
 }
 
 exports.add = async (req, res, next) => {
