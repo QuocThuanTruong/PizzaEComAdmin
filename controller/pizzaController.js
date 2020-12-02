@@ -3,6 +3,8 @@ const {ObjectId} = require('mongodb');
 
 const pizzaModel = require('../models/pizzaModel');
 
+let hbs = require('hbs')
+
 exports.index = async (req, res, next) => {
     const pizza = await pizzaModel.list()
 
