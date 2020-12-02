@@ -29,3 +29,31 @@ exports.get = async (id) => {
 
     return drink;
 }
+
+exports.insert = async (name, description, price) => {
+    const drinkCollection = db().collection('drink');
+
+    const _ = await drinkCollection.insertOne({
+        "category": "drink",
+        "name": name,
+        "description": description,
+        "price": price,
+    })
+}
+
+exports.delete = async (id) => {
+    const drinkCollection = db().collection('drink');
+
+    const _ = await drinkCollection.deleteOne({ '_id': ObjectId(id)})
+}
+
+exports.update = async (id, name, description, price) => {
+    const drinkCollection = db().collection('drink');
+
+    const _ = await drinkCollection.updateOne({'_id': ObjectId(id)}, {$set :{
+        "category": "drink",
+        "name": name,
+        "description": description,
+        "price": price,
+    }})
+}

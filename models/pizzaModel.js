@@ -34,6 +34,21 @@ exports.get = async (id) => {
     return pizza;
 }
 
+exports.insert = async (name, description, price, kind, sizes, doughs, topings) => {
+    const pizzaCollection = db().collection('pizza');
+
+    const _ = await pizzaCollection.insertOne( {
+        "category": "pizza",
+        "name": name,
+        "description": description,
+        "price": price,
+        "kind": kind,
+        "size": sizes,
+        "dough": doughs,
+        "toping": topings
+    })
+}
+
 exports.delete = async (id) => {
     const pizzaCollection = db().collection('pizza');
 

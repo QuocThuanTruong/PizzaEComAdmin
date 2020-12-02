@@ -96,22 +96,7 @@ exports.addInfo = async (req, res, next) => {
         })
     }
 
-    const pizzaCollection = db().collection('pizza');
-
-    const result = await pizzaCollection.insertOne( {
-        "category": "pizza",
-        "name": name,
-        "description": description,
-        "price": price,
-        "kind": kind,
-        "size": sizes,
-        "dough": doughs,
-        "toping": topings
-    })
-
-    console.log(
-        `${result.insertedCount} documents were inserted with the _id: ${result.insertedId}`,
-    );
+    const _ =  await pizzaModel.insert(name, description, price, kind, sizes, doughs, topings)
 
     res.render('pizza/add', {})
 };

@@ -210,9 +210,11 @@
                                         <button class="btn btn-primary waves-effect waves-light" onclick="sendInfo()">
                                             Update
                                         </button>
-                                        <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                                            Bỏ qua
-                                        </button>
+                                        <a href="/manage-pizza">
+                                            <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                                Bỏ qua
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                         </div>
@@ -267,7 +269,7 @@
         const toping2 = document.getElementById("toping2").checked
         const toping3 = document.getElementById("toping3").checked
         const toping4 = document.getElementById("toping4").checked
-        
+
         const form = document.createElement("form");
         form.method = "POST";
         form.action = "/manage-pizza/update/" + id;

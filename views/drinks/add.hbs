@@ -27,10 +27,9 @@
                         </p>
 
                         <!-- Form -->
-                            <form method="" action="/manage-pizza/add">
                                 <div class="form-group">
                                     <label>Tên</label>
-                                    <input type="text" class="form-control" required placeholder="Tên sản phẩm" name="name"/>
+                                    <input type="text" class="form-control" required placeholder="Tên sản phẩm" name="name" id="name"/>
                                 </div>
 
                                 <div class="form-group col-sm-2 img-picker-container"> 
@@ -42,7 +41,7 @@
                                 <div class="form-group">
                                     <label>Mô tả</label>
                                     <div>
-                                        <textarea required class="form-control" rows="5" required placeholder="Mô tả sản phẩm" name="description"></textarea>
+                                        <textarea required class="form-control" rows="5" required placeholder="Mô tả sản phẩm" name="description" id="description"></textarea>
                                     </div>
                                 </div>
 
@@ -60,9 +59,10 @@
                                     <label>Giá tiền</label>
                                     <div class="input-group">
                                         <input data-parsley-type="number" type="text"
-                                                class="form-control" required
-                                                placeholder="Giá tiền sản phẩm"
-                                                name="price"/>
+                                            class="form-control" required
+                                            placeholder="Giá tiền sản phẩm"
+                                            name="price"
+                                            id="price"/>
 
                                         <div class="input-group-append">
                                             <span class="input-group-text">VNĐ</span>
@@ -72,15 +72,18 @@
 
                                 <div class="form-group">
                                     <div>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                        <button class="btn btn-primary waves-effect waves-light" onclick="sendInfo()">
                                             Thêm
                                         </button>
-                                        <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                                            Bỏ qua
-                                        </button>
+
+                                        <a href="/manage-drinks">
+                                            <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                                Bỏ qua
+                                                
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div> <!-- end col -->
@@ -93,4 +96,53 @@
         © 2019 Stexo <span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</span>.
     </footer>
 </div>
+
+<script>
+    function sendInfo()
+    {
+        const name = document.getElementById("name");
+
+        if (name.value.length == 0) {
+            alert("Vui Lòng Không Bỏ Trống Tên Sản Phẩm")
+            return false
+        }
+
+        const description = document.getElementById("description");
+
+        if (description.value.length == 0) {
+            alert("Vui Lòng Không Bỏ Trống Mô Tả Sản Phẩm")
+            return false
+        }
+
+        const price = document.getElementById("price");
+
+        if (price.value.length == 0) {
+            alert("Vui Lòng Không Bỏ Trống Giá Sản Phẩm")
+            return false
+        }
+
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = "/manage-drinks/add";
+
+        const inputName = document.createElement("input");
+        inputName.name = "name";
+        inputName.value = name.value;
+        form.appendChild(inputName);
+
+        const inputDescription = document.createElement("input");
+        inputDescription.name = "description";
+        inputDescription.value = description.value;
+        form.appendChild(inputDescription);
+
+        const inputPrice = document.createElement("input");
+        inputPrice.name = "price";
+        inputPrice.value = price.value;
+        form.appendChild(inputPrice);
+
+        document.body.appendChild(form);
+
+        form.submit();
+    }
+</script>
 

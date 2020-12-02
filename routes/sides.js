@@ -5,8 +5,14 @@ const sideController = require('../controller/sideController')
 
 router.get('/', sideController.index)
 
+router.post('/', sideController.delete)
+
 router.get('/add', sideController.add);
 
-router.get('/update', sideController.update);
+router.post('/add', sideController.addInfo);
+
+router.get('/update/:id', sideController.update);
+
+router.post('/update/:id', sideController.updateInfo);
 
 module.exports = router;
