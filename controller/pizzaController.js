@@ -72,6 +72,8 @@ exports.addInfo = async (req, res, next) => {
                 }, (err, res) => {
                     pizza.images.push({src: res.secure_url})
                 })
+        } else {
+            pizza.images.push({src: ""})
         }
     
         const descriptionPicker2 = files.descriptionPicker2
@@ -85,6 +87,8 @@ exports.addInfo = async (req, res, next) => {
                 }, (err, res) => {
                     pizza.images.push({src: res.secure_url})
                 })
+        } else {
+            pizza.images.push({src: ""})
         }
     
         const descriptionPicker3 = files.descriptionPicker3
@@ -98,7 +102,8 @@ exports.addInfo = async (req, res, next) => {
                 }, (err, res) => {
                     pizza.images.push({src: res.secure_url})
                 })
-    
+        } else {
+            pizza.images.push({src: ""})
         }
     
         const descriptionPicker4 = files.descriptionPicker4
@@ -112,6 +117,8 @@ exports.addInfo = async (req, res, next) => {
                 }, (err, res) => {
                     pizza.images.push({src: res.secure_url})
                 })
+        } else {
+            pizza.images.push({src: ""})
         }
     
         console.log(pizza)
@@ -185,6 +192,8 @@ exports.updateInfo = async (req, res, next) => {
     fs.mkdirSync(path.join(__dirname, '..', 'tempImages'), { recursive: true })
     const form = formidable({multiples: true, keepExtensions: true, uploadDir : path.join(__dirname, '..', 'tempImages')})
 
+    let oldPizza =  await pizzaModel.get(req.params.id)
+
     await form.parse(req, async (err, fields, files) => {
         if (err) {
             return
@@ -192,70 +201,100 @@ exports.updateInfo = async (req, res, next) => {
 
         let pizza = pizzaModel.modify(fields);
         pizza._id = ObjectId(req.params.id)
-        
+
         const avatarPicker = files.avatarPicker
-        if (avatarPicker.name) {
-            await cloudinary.uploader.upload(avatarPicker.path,
-                {
-                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
-                    public_id: 'avatar',
-                    overwrite: true
-                }, (err, res) => {
-                    pizza.avatar = res.secure_url
-                })
+        if (avatarPicker) {
+            if (avatarPicker.name) {
+                await cloudinary.uploader.upload(avatarPicker.path,
+                    {
+                        folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                        public_id: 'avatar',
+                        overwrite: true
+                    }, (err, res) => {
+                        pizza.avatar = res.secure_url
+                    })
+            }
+            else {
+                pizza.avatar = ""
+            }
+        } else {
+            pizza.avatar = oldPizza.avatar
         }
 
         const descriptionPicker1 = files.descriptionPicker1
-        if (descriptionPicker1.name) {
-            //upload description
-            await cloudinary.uploader.upload(descriptionPicker1.path,
-                {
-                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
-                    public_id: 'description-1',
-                    overwrite: true
-                }, (err, res) => {
-                    pizza.images.push({src: res.secure_url})
-                })
+        if (descriptionPicker1) {
+            if (descriptionPicker1.name) {
+                await cloudinary.uploader.upload(descriptionPicker1.path,
+                    {
+                        folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                        public_id: 'description-1',
+                        overwrite: true
+                    }, (err, res) => {
+                        pizza.images[0] = {src: res.secure_url}
+                    })
+            }
+            else {
+                pizza.images[0] = {src: ""}
+            }
+        } else {
+            pizza.images[0] = oldPizza.images[0]
         }
     
         const descriptionPicker2 = files.descriptionPicker2
-        if (descriptionPicker2.name) {
-            //upload description
-            await cloudinary.uploader.upload(descriptionPicker2.path,
-                {
-                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
-                    public_id: 'description-2',
-                    overwrite: true
-                }, (err, res) => {
-                    pizza.images.push({src: res.secure_url})
-                })
+        if (descriptionPicker2) {
+            if (descriptionPicker2.name) {
+                await cloudinary.uploader.upload(descriptionPicker2.path,
+                    {
+                        folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                        public_id: 'description-2',
+                        overwrite: true
+                    }, (err, res) => {
+                        pizza.images[1] = {src: res.secure_url}
+                    })
+            }
+            else {
+                pizza.images[1] = {src: ""}
+            }
+        } else {
+            pizza.images[1] = oldPizza.images[1]
         }
     
         const descriptionPicker3 = files.descriptionPicker3
-        if (descriptionPicker3.name) {
-            //upload description
-            await cloudinary.uploader.upload(descriptionPicker3.path,
-                {
-                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
-                    public_id: 'description-3',
-                    overwrite: true
-                }, (err, res) => {
-                    pizza.images.push({src: res.secure_url})
-                })
-    
+        if (descriptionPicker3) {
+            if (descriptionPicker3.name) {
+                await cloudinary.uploader.upload(descriptionPicker3.path,
+                    {
+                        folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                        public_id: 'description-3',
+                        overwrite: true
+                    }, (err, res) => {
+                        pizza.images[2] = {src: res.secure_url}
+                    })
+            }
+            else {
+                pizza.images[2] = {src: ""}
+            }
+        } else {
+            pizza.images[2] = oldPizza.images[2]
         }
     
         const descriptionPicker4 = files.descriptionPicker4
-        if (descriptionPicker4.name) {
-            //upload description
-            await cloudinary.uploader.upload(descriptionPicker4.path,
-                {
-                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
-                    public_id: 'description-4',
-                    overwrite: true
-                }, (err, res) => {
-                    pizza.images.push({src: res.secure_url})
-                })
+        if (descriptionPicker4) {
+            if (descriptionPicker4.name) {
+                await cloudinary.uploader.upload(descriptionPicker4.path,
+                    {
+                        folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                        public_id: 'description-4',
+                        overwrite: true
+                    }, (err, res) => {
+                        pizza.images[3] = {src: res.secure_url}
+                    })
+            }
+            else {
+                pizza.images[3] = {src: ""}
+            }
+        } else {
+            pizza.images[3] = oldPizza.images[3]
         }
     
         //console.log(pizza)
