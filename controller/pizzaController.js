@@ -174,6 +174,10 @@ exports.update = async (req, res, next) => {
         return pizza.toping.filter(t => t.name === 'cải xà lách').length > 0
     })
 
+    hbs.handlebars.registerHelper("hasImage", () => {
+        return pizza.images.length > 0
+    })
+
     res.render('pizza/update', pizza)
 };
 

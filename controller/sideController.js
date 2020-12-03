@@ -8,6 +8,7 @@ const fs = require('fs')
 const path = require('path');
 const rimraf = require('rimraf')
 const mkdirp = require('mkdirp')
+const hbs = require('hbs')
 
 const cloudinary = require('cloudinary').v2;
 
@@ -123,9 +124,13 @@ exports.addInfo = async (req, res, next) => {
 };
 
 exports.update = async (req, res, next) => {
-    let sides =  await sideModel.get(req.params.id)
+    let side =  await sideModel.get(req.params.id)
 
-    res.render('sides/update', sides)
+    hbs.handlebars.registerHelper("hasImage", () => {
+        return side.images.length > 0
+    })
+
+    res.render('sides/update', side)
 };
 
 exports.updateInfo = async (req, res, next) => {
