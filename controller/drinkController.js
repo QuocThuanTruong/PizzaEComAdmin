@@ -38,15 +38,13 @@ exports.add = async (req, res, next) => {
 
 exports.addInfo = async (req, res, next) => {
     fs.mkdirSync(path.join(__dirname, '..', 'tempImages'), { recursive: true })
-
     const form = formidable({multiples: true, keepExtensions: true, uploadDir : path.join(__dirname, '..', 'tempImages')})
 
-    form.parse(req, async (err, fields, files) => {
+    await form.parse(req, async (err, fields, files) => {
         if (err) {
             return
         }
 
-        console.log(fields)
         let drink = drinkModel.modify(fields);
         
         const avatarPicker = files.avatarPicker
@@ -72,6 +70,8 @@ exports.addInfo = async (req, res, next) => {
                 }, (err, res) => {
                     drink.images.push({src: res.secure_url})
                 })
+        } else {
+            drink.images.push({src: ""})
         }
     
         const descriptionPicker2 = files.descriptionPicker2
@@ -85,6 +85,8 @@ exports.addInfo = async (req, res, next) => {
                 }, (err, res) => {
                     drink.images.push({src: res.secure_url})
                 })
+        } else {
+            drink.images.push({src: ""})
         }
     
         const descriptionPicker3 = files.descriptionPicker3
@@ -98,7 +100,8 @@ exports.addInfo = async (req, res, next) => {
                 }, (err, res) => {
                     drink.images.push({src: res.secure_url})
                 })
-    
+        } else {
+            drink.images.push({src: ""})
         }
     
         const descriptionPicker4 = files.descriptionPicker4
@@ -112,6 +115,8 @@ exports.addInfo = async (req, res, next) => {
                 }, (err, res) => {
                     drink.images.push({src: res.secure_url})
                 })
+        } else {
+            drink.images.push({src: ""})
         }
     
         console.log(drink)
