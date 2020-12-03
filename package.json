@@ -15,8 +15,10 @@
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
     "jsdom": "^16.4.0",
+    "mkdirp": "^1.0.4",
     "mongodb": "^3.6.3",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "rimraf": "^3.0.2"
   }
 }

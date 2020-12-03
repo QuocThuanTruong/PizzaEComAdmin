@@ -4,8 +4,11 @@ const {ObjectId} = require('mongodb');
 const formidable = require('formidable');
 const fs = require('fs')
 const path = require('path');
+const rimraf = require('rimraf')
+const mkdirp = require('mkdirp')
 
 const cloudinary = require('cloudinary').v2;
+
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUD_NAME, 
@@ -36,6 +39,7 @@ exports.add = async (req, res, next) => {
 };
 
 exports.addInfo = async (req, res, next) => {
+    fs.mkdirSync(path.join(__dirname, '..', 'tempImages'), { recursive: true })
     const form = formidable({multiples: true, keepExtensions: true, uploadDir : path.join(__dirname, '..', 'tempImages')})
 
     form.parse(req, async (err, fields, files) => {
@@ -116,7 +120,9 @@ exports.addInfo = async (req, res, next) => {
         }
     
         console.log(pizza)
-        const _ = await pizzaModel.insert(pizza)
+        //const _ = await pizzaModel.insert(pizza)
+
+        rimraf.sync(path.join(__dirname, '..', 'tempImages'))
     })
 
     res.render('pizza/add', {})
