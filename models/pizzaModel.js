@@ -1,6 +1,8 @@
 const {db} = require('../dal/db');
 const {ObjectId} = require('mongodb');
 
+
+
 class Pizza {
     constructor(_id, name, avatar, description, cover, images, price, kind, size, dough, toping) {
         this._id = _id
@@ -34,18 +36,21 @@ exports.get = async (id) => {
     return pizza;
 }
 
-exports.insert = async (name, description, price, kind, sizes, doughs, topings) => {
+exports.insert = async (pizza) => {
     const pizzaCollection = db().collection('pizza');
 
     const _ = await pizzaCollection.insertOne( {
-        "category": "pizza",
-        "name": name,
-        "description": description,
-        "price": price,
-        "kind": kind,
-        "size": sizes,
-        "dough": doughs,
-        "toping": topings
+        "_id": ObjectId(pizza.id),
+        "category": pizza.category,
+        "name": pizza.name,
+        "avatar": pizza.avatar,
+        "description": pizza.description,
+        "images": pizza.images,
+        "price": pizza.price,
+        "kind": pizza.kind,
+        "size": pizza.size,
+        "dough": pizza.dough,
+        "toping": pizza.toping
     })
 }
 
@@ -68,4 +73,93 @@ exports.update = async (id, name, description, price, kind, sizes, doughs, topin
         "dough": doughs,
         "toping": topings
     }})
+}
+
+exports.modify = (fields) => {
+    let id = new ObjectId()
+    let name = fields.name
+    let description = fields.description
+    let price = parseInt(fields.price)
+    let kind = fields.kind
+
+    let sizes = []
+
+    if (fields.size1 == 'on') {
+        sizes.push({
+            radius: "25",
+            weight: "250g"
+        })
+    }
+
+    if (fields.size2 == 'on') {
+        sizes.push({
+            radius: "30",
+            weight: "450g"
+        })
+    }
+
+    if (fields.size3 == 'on') {
+        sizes.push({
+            radius: "40",
+            weight: "550g"
+        })
+    }
+
+    let doughs = []
+
+    if (fields.dough1 == 'on') {
+        doughs.push({
+            name: "mỏng",
+        })
+    }
+
+    if (fields.dough2 == 'on') {
+        doughs.push({
+            name: "dày",
+        })
+    }
+
+    let topings = []
+
+    if (fields.toping1 == 'on') {
+        topings.push({
+            name: "ớt chuông",
+            image: "toping-1.jpg"
+        })
+    }
+
+    if (fields.toping2 == 'on') {
+        topings.push({
+            name: "thịt xông khói",
+            image: "toping-2.jpg"
+        })
+    }
+
+    if (fields.toping3 == 'on') {
+        topings.push({
+            name: "nấm",
+            image: "toping-3.jpg"
+        })
+    }
+
+    if (fields.toping4 == 'on') {
+        topings.push({
+            name: "cải xà lách",
+            image: "toping-4.jpg"
+        })
+    }
+
+    return {
+        _id: id,
+        category: "pizza",
+        name: name,
+        avatar: "",
+        description: description,
+        images: [],
+        price: price,
+        kind: kind,
+        size: sizes,
+        dough: doughs,
+        toping: topings
+    }
 }

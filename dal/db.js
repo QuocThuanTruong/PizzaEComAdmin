@@ -1,7 +1,6 @@
 const { MongoClient } = require("mongodb");
 
-const uri =
-    "mongodb+srv://web:Web123456@cluster0.smrwq.mongodb.net/FinalProject?retryWrites=true&w=majority";
+const uri = process.env.URI
 // Create a new MongoClient
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 

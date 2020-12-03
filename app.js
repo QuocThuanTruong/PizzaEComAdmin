@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -11,7 +13,6 @@ var drinksRouter = require('./routes/drinks')
 var sidesRouter = require('./routes/sides')
 
 var app = express();
-
 
 let hbs = require('hbs')
 

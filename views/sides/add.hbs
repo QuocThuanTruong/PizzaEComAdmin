@@ -48,10 +48,10 @@
                                 <div class="form-group img-picker-container"> 
                                     <label>Ảnh mô tả</label>
                                     <div class="row">
-                                    <div class="img-picker col-sm-2"></div>
-                                    <div class="img-picker col-sm-2"></div>
-                                    <div class="img-picker col-sm-2"></div>
-                                    <div class="img-picker col-sm-2"></div>
+                                    <div class="img-picker col-sm-2" id="descriptionPicker1" name="descriptionPicker1"></div>
+                                    <div class="img-picker col-sm-2" id="descriptionPicker2" name="descriptionPicker2"></div>
+                                    <div class="img-picker col-sm-2" id="descriptionPicker3" name="descriptionPicker3"></div>
+                                    <div class="img-picker col-sm-2" id="descriptionPicker4" name="descriptionPicker4"></div>
                                 </div>
                                 </div> 
 
@@ -142,5 +142,30 @@
 
         form.submit();
     }
+
+
 </script>
+<script>
+    $(document).ready(function() {
+        // $('.img-picker').imagePicker({name: 'avatarImage'});
+
+        let avatarPicker = $(document.getElementById('avatarPicker'))
+        avatarPicker.imagePicker({name: 'avatarPicker'});
+
+        let descriptionPicker1 = $(document.getElementById('descriptionPicker1'))
+        descriptionPicker1.imagePicker({name: 'descriptionPicker1'});
+
+        let descriptionPicker2 = $(document.getElementById('descriptionPicker2'))
+        descriptionPicker2.imagePicker({name: 'descriptionPicker2'});
+
+        let descriptionPicker3 = $(document.getElementById('descriptionPicker3'))
+        descriptionPicker3.imagePicker({name: 'descriptionPicker3'});
+
+        let descriptionPicker4 = $(document.getElementById('descriptionPicker4'))
+        descriptionPicker4.imagePicker({name: 'descriptionPicker4'});
+
+    })
+</script>
+
+
 

@@ -1,7 +1,5 @@
-(function ( $ ) {
- 
+(function ($) {
     $.fn.imagePicker = function( options ) {
-        
         // Define plugin options
         var settings = $.extend({
             // Input name attribute
@@ -13,10 +11,7 @@
         }, options );
         
         // Create an input inside each matched element
-        return this.each(function() {
-            $(this).html(create_btn(this, settings));
-        });
- 
+        return $(this).html(create_btn(this, settings));
     };
  
     // Private function for creating the input element
@@ -25,7 +20,7 @@
         var picker_btn_icon = $('<i class="'+settings.icon+'"></i>');
         
         // The actual file input which stays hidden
-        var picker_btn_input = $('<input type="file" name="'+settings.name+'" />');
+        var picker_btn_input = $('<input type="file" name="'+settings.name+'" accept="image/*"/>');
         
         // The actual element displayed
         var picker_btn = $('<div class="'+settings.class+' img-upload-btn"></div>')
@@ -40,7 +35,7 @@
                 
                 // Create a preview once image has loaded
                 reader.onload = function(e) {
-                    var preview = create_preview(that, e.target.result, settings);
+                    var preview = create_preview(that, e.target.result, settings, picker_btn_input);
                     $(that).html(preview);
                 }
                 
@@ -53,30 +48,48 @@
     };
     
     // Private function for creating a preview element
-    function create_preview(that, src, settings) {
+    function create_preview(that, src, settings, picker_input) {
+        // The preview image
+        var picker_preview_image = $('<img src="'+src+'" class="img-responsive img-rounded" />');
         
-            // The preview image
-            var picker_preview_image = $('<img src="'+src+'" class="img-responsive img-rounded" />');
-            
-            // The remove image button
-            var picker_preview_remove = $('<button class="btn btn-outline-primary waves-effect waves-light btn-remove-img-upload"><small>Remove</small></button>');
-            
-            // The preview element
-            var picker_preview = $('<div class="text-center"></div>')
-                .append(picker_preview_image)
-                .append(picker_preview_remove);
+        // The remove image button
+        var picker_preview_remove = $('<button class="btn btn-outline-primary waves-effect waves-light btn-remove-img-upload"><small>Remove</small></button>');
 
-            // Remove image listener
-            picker_preview_remove.click(function() {
-                var btn = create_btn(that, settings);
-                $(that).html(btn);
-            });
-            
-            return picker_preview;
+        picker_input[0].hidden = true
+        
+        // The preview element
+        var picker_preview = $('<div class="text-center"></div>')
+            .append(picker_preview_image)
+            .append(picker_preview_remove)
+            .append(picker_input);
+
+        // Remove image listener
+        picker_preview_remove.click(function() {
+            var btn = create_btn(that, settings);
+            $(that).html(btn);
+        });
+        
+        return picker_preview;
     };
     
-}( jQuery ));
+}(jQuery));
 
-$(document).ready(function() {
-    $('.img-picker').imagePicker({name: 'images'});
-})
+    $(document).ready(function() {
+        // $('.img-picker').imagePicker({name: 'avatarImage'});
+
+        let avatarPicker = $(document.getElementById('avatarPicker'))
+        avatarPicker.imagePicker({name: 'avatarPicker'});
+
+        let descriptionPicker1 = $(document.getElementById('descriptionPicker1'))
+        descriptionPicker1.imagePicker({name: 'descriptionPicker1'});
+
+        let descriptionPicker2 = $(document.getElementById('descriptionPicker2'))
+        descriptionPicker2.imagePicker({name: 'descriptionPicker2'});
+
+        let descriptionPicker3 = $(document.getElementById('descriptionPicker3'))
+        descriptionPicker3.imagePicker({name: 'descriptionPicker3'});
+
+        let descriptionPicker4 = $(document.getElementById('descriptionPicker4'))
+        descriptionPicker4.imagePicker({name: 'descriptionPicker4'});
+
+    })

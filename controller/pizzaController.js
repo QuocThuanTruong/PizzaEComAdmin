@@ -1,6 +1,18 @@
 const {db} = require('../dal/db');
 const {ObjectId} = require('mongodb');
 
+const formidable = require('formidable');
+const fs = require('fs')
+const path = require('path');
+
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET 
+});
+
 const pizzaModel = require('../models/pizzaModel');
 
 let hbs = require('hbs')
@@ -24,79 +36,88 @@ exports.add = async (req, res, next) => {
 };
 
 exports.addInfo = async (req, res, next) => {
-    let name = req.body['name']
-    let description = req.body['description']
-    let price = parseInt(req.body['price'])
-    let kind = req.body['kind']
+    const form = formidable({multiples: true, keepExtensions: true, uploadDir : path.join(__dirname, '..', 'tempImages')})
 
-    let sizes = []
+    form.parse(req, async (err, fields, files) => {
+        if (err) {
+            return
+        }
 
-    if (req.body['size1'] == 'true') {
-        sizes.push({
-            radius: "25",
-            weight: "250g"
-        })
-    }
+        let pizza = pizzaModel.modify(fields);
+        
+        const avatarPicker = files.avatarPicker
+        if (avatarPicker.name) {
+            await cloudinary.uploader.upload(avatarPicker.path,
+                {
+                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                    public_id: 'avatar',
+                    overwrite: true
+                }, (err, res) => {
+                    console.log(res)
+                    pizza.avatar = res.secure_url
+                })
+        }
 
-    if (req.body['size2'] == 'true') {
-        sizes.push({
-            radius: "30",
-            weight: "450g"
-        })
-    }
-
-    if (req.body['size3'] == 'true') {
-        sizes.push({
-            radius: "40",
-            weight: "550g"
-        })
-    }
-
-    let doughs = []
-
-    if (req.body['dough1'] == 'true') {
-        doughs.push({
-            name: "mỏng",
-        })
-    }
-
-    if (req.body['dough2'] == 'true') {
-        doughs.push({
-            name: "dày",
-        })
-    }
-
-    let topings = []
-
-    if (req.body['toping1'] == 'true') {
-        topings.push({
-            name: "ớt chuông",
-            image: "toping-1.jpg"
-        })
-    }
-
-    if (req.body['toping2'] == 'true') {
-        topings.push({
-            name: "thịt xông khói",
-            image: "toping-2.jpg"
-        })
-    }
-
-    if (req.body['toping3'] == 'true') {
-        topings.push({
-            name: "nấm",
-            image: "toping-3.jpg"
-        })
-    }
-
-    if (req.body['toping4'] == 'true') {
-        topings.push({
-            name: "cải xà lách",
-            image: "toping-4.jpg"
-        })
-    }
-
-    const _ =  await pizzaModel.insert(name, description, price, kind, sizes, doughs, topings)
+        const descriptionPicker1 = files.descriptionPicker1
+        if (descriptionPicker1.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker1.path,
+                {
+                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                    public_id: 'description-1',
+                    overwrite: true
+                }, (err, res) => {
+                    console.log(res)
+                    pizza.images.push({src: res.secure_url})
+                })
+        }
+    
+        const descriptionPicker2 = files.descriptionPicker2
+        if (descriptionPicker2.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker2.path,
+                {
+                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                    public_id: 'description-2',
+                    overwrite: true
+                }, (err, res) => {
+                    console.log(res)
+                    pizza.images.push({src: res.secure_url})
+                })
+        }
+    
+        const descriptionPicker3 = files.descriptionPicker3
+        if (descriptionPicker3.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker3.path,
+                {
+                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                    public_id: 'description-3',
+                    overwrite: true
+                }, (err, res) => {
+                    console.log(res)
+                    pizza.images.push({src: res.secure_url})
+                })
+    
+        }
+    
+        const descriptionPicker4 = files.descriptionPicker4
+        if (descriptionPicker4.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker4.path,
+                {
+                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                    public_id: 'description-4',
+                    overwrite: true
+                }, (err, res) => {
+                    console.log(res)
+                    pizza.images.push({src: res.secure_url})
+                })
+        }
+    
+        console.log(pizza)
+        const _ = await pizzaModel.insert(pizza)
+    })
 
     res.render('pizza/add', {})
 };
