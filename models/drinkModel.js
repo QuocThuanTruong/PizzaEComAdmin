@@ -30,14 +30,17 @@ exports.get = async (id) => {
     return drink;
 }
 
-exports.insert = async (name, description, price) => {
+exports.insert = async (drink) => {
     const drinkCollection = db().collection('drink');
 
-    const _ = await drinkCollection.insertOne({
-        "category": "drink",
-        "name": name,
-        "description": description,
-        "price": price,
+    const _ = await drinkCollection.insertOne( {
+        "_id": ObjectId(drink._id),
+        "category": drink.category,
+        "name": drink.name,
+        "avatar": drink.avatar,
+        "description": drink.description,
+        "images": drink.images,
+        "price": drink.price,
     })
 }
 
@@ -56,4 +59,21 @@ exports.update = async (id, name, description, price) => {
         "description": description,
         "price": price,
     }})
+}
+
+exports.modify = (fields) => {
+    let id = new ObjectId()
+    let name = fields.name
+    let description = fields.description
+    let price = parseInt(fields.price)
+
+    return {
+        _id: id,
+        category: "drink",
+        name: name,
+        avatar: "",
+        description: description,
+        images: [],
+        price: price,
+    }
 }

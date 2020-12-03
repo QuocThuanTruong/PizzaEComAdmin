@@ -3,7 +3,19 @@ const {ObjectId} = require('mongodb');
 
 const drinkModel = require('../models/drinkModel')
 
-let hbs = require('hbs')
+const formidable = require('formidable');
+const fs = require('fs')
+const path = require('path');
+const rimraf = require('rimraf')
+const mkdirp = require('mkdirp')
+
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET 
+});
 
 exports.index = async (req, res, next) => {
     const drinks = await drinkModel.list()
@@ -24,11 +36,88 @@ exports.add = async (req, res, next) => {
 };
 
 exports.addInfo = async (req, res, next) => {
-    let name = req.body['name']
-    let description = req.body['description']
-    let price = parseInt(req.body['price'])
+    fs.mkdirSync(path.join(__dirname, '..', 'tempImages'), { recursive: true })
 
-    const _ =  await drinkModel.insert(name, description, price)
+    const form = formidable({multiples: true, keepExtensions: true, uploadDir : path.join(__dirname, '..', 'tempImages')})
+
+    form.parse(req, async (err, fields, files) => {
+        if (err) {
+            return
+        }
+
+        console.log(fields)
+        let drink = drinkModel.modify(fields);
+        
+        const avatarPicker = files.avatarPicker
+        if (avatarPicker.name) {
+            await cloudinary.uploader.upload(avatarPicker.path,
+                {
+                    folder: 'WebFinalProject/Images/drink/'+drink._id,
+                    public_id: 'avatar',
+                    overwrite: true
+                }, (err, res) => {
+                    drink.avatar = res.secure_url
+                })
+        }
+
+        const descriptionPicker1 = files.descriptionPicker1
+        if (descriptionPicker1.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker1.path,
+                {
+                    folder: 'WebFinalProject/Images/drink/'+drink._id,
+                    public_id: 'description-1',
+                    overwrite: true
+                }, (err, res) => {
+                    drink.images.push({src: res.secure_url})
+                })
+        }
+    
+        const descriptionPicker2 = files.descriptionPicker2
+        if (descriptionPicker2.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker2.path,
+                {
+                    folder: 'WebFinalProject/Images/drink/'+drink._id,
+                    public_id: 'description-2',
+                    overwrite: true
+                }, (err, res) => {
+                    drink.images.push({src: res.secure_url})
+                })
+        }
+    
+        const descriptionPicker3 = files.descriptionPicker3
+        if (descriptionPicker3.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker3.path,
+                {
+                    folder: 'WebFinalProject/Images/drink/'+drink._id,
+                    public_id: 'description-3',
+                    overwrite: true
+                }, (err, res) => {
+                    drink.images.push({src: res.secure_url})
+                })
+    
+        }
+    
+        const descriptionPicker4 = files.descriptionPicker4
+        if (descriptionPicker4.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker4.path,
+                {
+                    folder: 'WebFinalProject/Images/drink/'+drink._id,
+                    public_id: 'description-4',
+                    overwrite: true
+                }, (err, res) => {
+                    drink.images.push({src: res.secure_url})
+                })
+        }
+    
+        console.log(drink)
+        const _ = await drinkModel.insert(drink)
+
+        rimraf.sync(path.join(__dirname, '..', 'tempImages'))
+    })
 
     res.render('drinks/add', {})
 };

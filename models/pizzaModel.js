@@ -40,7 +40,7 @@ exports.insert = async (pizza) => {
     const pizzaCollection = db().collection('pizza');
 
     const _ = await pizzaCollection.insertOne( {
-        "_id": ObjectId(pizza.id),
+        "_id": ObjectId(pizza._id),
         "category": pizza.category,
         "name": pizza.name,
         "avatar": pizza.avatar,

@@ -28,14 +28,17 @@ exports.get = async (id) => {
     return side;
 }
 
-exports.insert = async (name, description, price) => {
+exports.insert = async (side) => {
     const sideCollection = db().collection('side');
 
-    const _ = await sideCollection.insertOne({
-        "category": "side",
-        "name": name,
-        "description": description,
-        "price": price,
+    const _ = await sideCollection.insertOne( {
+        "_id": ObjectId(side._id),
+        "category": side.category,
+        "name": side.name,
+        "avatar": side.avatar,
+        "description": side.description,
+        "images": side.images,
+        "price": side.price,
     })
 }
 
@@ -46,12 +49,29 @@ exports.delete = async (id) => {
 }
 
 exports.update = async (id, name, description, price) => {
-    const drinkCollection = db().collection('side');
+    const sideCollection = db().collection('side');
 
-    const _ = await drinkCollection.updateOne({'_id': ObjectId(id)}, {$set :{
+    const _ = await sideCollection.updateOne({'_id': ObjectId(id)}, {$set :{
         "category": "side",
         "name": name,
         "description": description,
         "price": price,
     }})
+}
+
+exports.modify = (fields) => {
+    let id = new ObjectId()
+    let name = fields.name
+    let description = fields.description
+    let price = parseInt(fields.price)
+
+    return {
+        _id: id,
+        category: "side",
+        name: name,
+        avatar: "",
+        description: description,
+        images: [],
+        price: price,
+    }
 }

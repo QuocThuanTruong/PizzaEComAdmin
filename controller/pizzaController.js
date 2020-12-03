@@ -42,7 +42,7 @@ exports.addInfo = async (req, res, next) => {
     fs.mkdirSync(path.join(__dirname, '..', 'tempImages'), { recursive: true })
     const form = formidable({multiples: true, keepExtensions: true, uploadDir : path.join(__dirname, '..', 'tempImages')})
 
-    form.parse(req, async (err, fields, files) => {
+    let a = await form.parse(req, async (err, fields, files) => {
         if (err) {
             return
         }
@@ -57,7 +57,6 @@ exports.addInfo = async (req, res, next) => {
                     public_id: 'avatar',
                     overwrite: true
                 }, (err, res) => {
-                    console.log(res)
                     pizza.avatar = res.secure_url
                 })
         }
@@ -71,7 +70,6 @@ exports.addInfo = async (req, res, next) => {
                     public_id: 'description-1',
                     overwrite: true
                 }, (err, res) => {
-                    console.log(res)
                     pizza.images.push({src: res.secure_url})
                 })
         }
@@ -85,7 +83,6 @@ exports.addInfo = async (req, res, next) => {
                     public_id: 'description-2',
                     overwrite: true
                 }, (err, res) => {
-                    console.log(res)
                     pizza.images.push({src: res.secure_url})
                 })
         }
@@ -99,7 +96,6 @@ exports.addInfo = async (req, res, next) => {
                     public_id: 'description-3',
                     overwrite: true
                 }, (err, res) => {
-                    console.log(res)
                     pizza.images.push({src: res.secure_url})
                 })
     
@@ -114,13 +110,12 @@ exports.addInfo = async (req, res, next) => {
                     public_id: 'description-4',
                     overwrite: true
                 }, (err, res) => {
-                    console.log(res)
                     pizza.images.push({src: res.secure_url})
                 })
         }
     
         console.log(pizza)
-        //const _ = await pizzaModel.insert(pizza)
+        const _ = await pizzaModel.insert(pizza)
 
         rimraf.sync(path.join(__dirname, '..', 'tempImages'))
     })
