@@ -48,14 +48,16 @@ exports.delete = async (id) => {
     const _ = await sideCollection.deleteOne({ '_id': ObjectId(id)})
 }
 
-exports.update = async (id, name, description, price) => {
+exports.update = async (side) => {
     const sideCollection = db().collection('side');
-
-    const _ = await sideCollection.updateOne({'_id': ObjectId(id)}, {$set :{
-        "category": "side",
-        "name": name,
-        "description": description,
-        "price": price,
+    
+    const _ = await sideCollection.updateOne({'_id': side._id}, {$set :{
+        "category": side.category,
+        "name": side.name,
+        "avatar": side.avatar,
+        "description": side.description,
+        "images": side.images,
+        "price": side.price,
     }})
 }
 

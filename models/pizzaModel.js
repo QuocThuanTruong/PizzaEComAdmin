@@ -60,18 +60,20 @@ exports.delete = async (id) => {
     const _ = await pizzaCollection.deleteOne({ '_id': ObjectId(id)})
 }
 
-exports.update = async (id, name, description, price, kind, sizes, doughs, topings) => {
+exports.update = async (pizza) => {
     const pizzaCollection = db().collection('pizza');
 
-    const _ = await pizzaCollection.updateOne({'_id': ObjectId(id)}, {$set :{
-        "category": "pizza",
-        "name": name,
-        "description": description,
-        "price": price,
-        "kind": kind,
-        "size": sizes,
-        "dough": doughs,
-        "toping": topings
+    const _ = await pizzaCollection.updateOne({'_id': pizza._id}, {$set :{
+        "category": pizza.category,
+        "name": pizza.name,
+        "avatar": pizza.avatar,
+        "description": pizza.description,
+        "images": pizza.images,
+        "price": pizza.price,
+        "kind": pizza.kind,
+        "size": pizza.size,
+        "dough": pizza.dough,
+        "toping": pizza.toping
     }})
 }
 

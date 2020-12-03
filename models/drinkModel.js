@@ -50,16 +50,19 @@ exports.delete = async (id) => {
     const _ = await drinkCollection.deleteOne({ '_id': ObjectId(id)})
 }
 
-exports.update = async (id, name, description, price) => {
+exports.update = async (drink) => {
     const drinkCollection = db().collection('drink');
-
-    const _ = await drinkCollection.updateOne({'_id': ObjectId(id)}, {$set :{
-        "category": "drink",
-        "name": name,
-        "description": description,
-        "price": price,
+    
+    const _ = await drinkCollection.updateOne({'_id': drink._id}, {$set :{
+        "category": drink.category,
+        "name": drink.name,
+        "avatar": drink.avatar,
+        "description": drink.description,
+        "images": drink.images,
+        "price": drink.price,
     }})
 }
+
 
 exports.modify = (fields) => {
     let id = new ObjectId()

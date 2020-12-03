@@ -74,22 +74,21 @@
     
 }(jQuery));
 
-    $(document).ready(function() {
-        // $('.img-picker').imagePicker({name: 'avatarImage'});
+$(document).ready(function() {
+    // $('.img-picker').imagePicker({name: 'avatarImage'});
 
-        let avatarPicker = $(document.getElementById('avatarPicker'))
-        avatarPicker.imagePicker({name: 'avatarPicker'});
+    let avatarPicker = $(document.getElementById('avatarPicker'))
+    avatarPicker.imagePicker({name: 'avatarPicker'});
 
-        let descriptionPicker1 = $(document.getElementById('descriptionPicker1'))
-        descriptionPicker1.imagePicker({name: 'descriptionPicker1'});
+    let descriptionPicker1 = $(document.getElementById('descriptionPicker1'))
+    descriptionPicker1.imagePicker({name: 'descriptionPicker1'});
 
-        let descriptionPicker2 = $(document.getElementById('descriptionPicker2'))
-        descriptionPicker2.imagePicker({name: 'descriptionPicker2'});
+    let descriptionPicker2 = $(document.getElementById('descriptionPicker2'))
+    descriptionPicker2.imagePicker({name: 'descriptionPicker2'});
 
-        let descriptionPicker3 = $(document.getElementById('descriptionPicker3'))
-        descriptionPicker3.imagePicker({name: 'descriptionPicker3'});
+    let descriptionPicker3 = $(document.getElementById('descriptionPicker3'))
+    descriptionPicker3.imagePicker({name: 'descriptionPicker3'});
 
-        let descriptionPicker4 = $(document.getElementById('descriptionPicker4'))
-        descriptionPicker4.imagePicker({name: 'descriptionPicker4'});
-
-    })
+    let descriptionPicker4 = $(document.getElementById('descriptionPicker4'))
+    descriptionPicker4.imagePicker({name: 'descriptionPicker4'});
+})

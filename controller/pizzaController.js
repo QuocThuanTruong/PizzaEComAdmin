@@ -42,7 +42,7 @@ exports.addInfo = async (req, res, next) => {
     fs.mkdirSync(path.join(__dirname, '..', 'tempImages'), { recursive: true })
     const form = formidable({multiples: true, keepExtensions: true, uploadDir : path.join(__dirname, '..', 'tempImages')})
 
-    let a = await form.parse(req, async (err, fields, files) => {
+    await form.parse(req, async (err, fields, files) => {
         if (err) {
             return
         }
@@ -178,81 +178,90 @@ exports.update = async (req, res, next) => {
 };
 
 exports.updateInfo = async (req, res, next) => {
-    console.log(req.body);
+    fs.mkdirSync(path.join(__dirname, '..', 'tempImages'), { recursive: true })
+    const form = formidable({multiples: true, keepExtensions: true, uploadDir : path.join(__dirname, '..', 'tempImages')})
 
-    let name = req.body['name']
-    let description = req.body['description']
-    let price = parseInt(req.body['price'])
-    let kind = req.body['kind']
+    await form.parse(req, async (err, fields, files) => {
+        if (err) {
+            return
+        }
 
-    let sizes = []
+        let pizza = pizzaModel.modify(fields);
+        pizza._id = ObjectId(req.params.id)
+        
+        const avatarPicker = files.avatarPicker
+        if (avatarPicker.name) {
+            await cloudinary.uploader.upload(avatarPicker.path,
+                {
+                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                    public_id: 'avatar',
+                    overwrite: true
+                }, (err, res) => {
+                    pizza.avatar = res.secure_url
+                })
+        }
 
-    if (req.body['size1'] == 'true') {
-        sizes.push({
-            radius: "25",
-            weight: "250g"
-        })
-    }
+        const descriptionPicker1 = files.descriptionPicker1
+        if (descriptionPicker1.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker1.path,
+                {
+                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                    public_id: 'description-1',
+                    overwrite: true
+                }, (err, res) => {
+                    pizza.images.push({src: res.secure_url})
+                })
+        }
+    
+        const descriptionPicker2 = files.descriptionPicker2
+        if (descriptionPicker2.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker2.path,
+                {
+                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                    public_id: 'description-2',
+                    overwrite: true
+                }, (err, res) => {
+                    pizza.images.push({src: res.secure_url})
+                })
+        }
+    
+        const descriptionPicker3 = files.descriptionPicker3
+        if (descriptionPicker3.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker3.path,
+                {
+                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                    public_id: 'description-3',
+                    overwrite: true
+                }, (err, res) => {
+                    pizza.images.push({src: res.secure_url})
+                })
+    
+        }
+    
+        const descriptionPicker4 = files.descriptionPicker4
+        if (descriptionPicker4.name) {
+            //upload description
+            await cloudinary.uploader.upload(descriptionPicker4.path,
+                {
+                    folder: 'WebFinalProject/Images/pizza/'+pizza._id,
+                    public_id: 'description-4',
+                    overwrite: true
+                }, (err, res) => {
+                    pizza.images.push({src: res.secure_url})
+                })
+        }
+    
+        //console.log(pizza)
+        const _ = await pizzaModel.update(pizza)
 
-    if (req.body['size2'] == 'true') {
-        sizes.push({
-            radius: "30",
-            weight: "450g"
-        })
-    }
+        rimraf.sync(path.join(__dirname, '..', 'tempImages'))
 
-    if (req.body['size3'] == 'true') {
-        sizes.push({
-            radius: "40",
-            weight: "550g"
-        })
-    }
+        this.update(req, res, next)
+    })
 
-    let doughs = []
-
-    if (req.body['dough1'] == 'true') {
-        doughs.push({
-            name: "mỏng",
-        })
-    }
-
-    if (req.body['dough2'] == 'true') {
-        doughs.push({
-            name: "dày",
-        })
-    }
-
-    let topings = []
-
-    if (req.body['toping1'] == 'true') {
-        topings.push({
-            name: "ớt chuông",
-            image: "toping-1.jpg"
-        })
-    }
-
-    if (req.body['toping2'] == 'true') {
-        topings.push({
-            name: "thịt xông khói",
-            image: "toping-2.jpg"
-        })
-    }
-
-    if (req.body['toping3'] == 'true') {
-        topings.push({
-            name: "nấm",
-            image: "toping-3.jpg"
-        })
-    }
-
-    if (req.body['toping4'] == 'true') {
-        topings.push({
-            name: "cải xà lách",
-            image: "toping-4.jpg"
-        })
-    }
-
-    const _ = await pizzaModel.update(req.params.id, name, description, price, kind, sizes, doughs, topings)
-
-    this.update(req, res, next)
+    //console.log(req.body)
+   
 };
